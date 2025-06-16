@@ -5,43 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .container {
-            display: flex;
-            flex-direction: column;
-            width: 400px;
-            height: auto;
-        }
-
-        .display {
-            height: auto;
-            min-height: 150px;
-            background-color: green;
-            width: 100%;
-            font-size: 50px;
-            word-wrap: break-word;
-            text-align: right;
-            padding: 10px;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        .buttons {
-
-            display: grid;
-            grid-template-columns: auto auto auto;
-        }
-
-        .buttons button {
-            height: 50px;
-        }
-
-        button:hover {
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="container">
         <div class="display">9+3</div>
@@ -65,118 +30,8 @@
             <button>AC</button>
             <button>=</button>
         </div>
-
     </div>
-    <script>
-        let firstNum;
-        let secondNum;
-        let expression = '';
-        let operation;
-        let operators = ['+', '-', '*', '/']
-        let buttons = document.querySelectorAll('button');
-        let display = document.querySelector('.display');
-        let dotCount = 0;
-        display.innerText = '';
-        function updateDisplay() {
-            display.innerText = expression;
-        }
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener('click', event => {
-                if (operators.includes(event.target.innerText) && !(operation) && (expression)) {
-                    firstNum = parseFloat(expression);
-                    operation = (event.target.innerText);
-                    console.log('firstNum: ', firstNum, 'Operation: ', operation);
-                    expression = expression.concat(`${event.target.innerText}`);
-                    updateDisplay();
-                    console.log(`expression: ${expression}`);
-
-                } else if ((event.target.innerText == '=') && (firstNum !== undefined) && (operation)) {
-                    if ((firstNum != undefined) && operation) {
-                        secondNum = parseFloat(expression.slice(expression.indexOf(operation, firstNum.length) + 1))
-                        console.log('secondNum: ', secondNum);
-                    }
-                    if (!secondNum && operation) {
-                        result = expression.slice(0, expression.length - 1);
-
-                    } else {
-                        result = operate(firstNum, operation, secondNum);
-                    }
-                    expression = `${result}`;
-                    console.log(result);
-                    updateDisplay();
-                    firstNum = undefined;
-                    secondNum = undefined;
-                    operation = undefined;
-                } else if (event.target.innerText == 'AC') {
-                    expression = '';
-                    firstNum = undefined;
-                    secondNum = undefined;
-                    operation = undefined;
-                    dotCount = 0;
-                    updateDisplay();
-                } else if (event.target.innerText == 'Del') {
-                    if (operators.includes(expression.slice(expression.length - 1))) {
-                        operation = undefined;
-                    }
-                    if ((expression.slice(expression.length - 1)) == '.') {
-                        dotCount--;
-                    }
-                    expression = expression.slice(0, expression.length - 1)
-                    updateDisplay();
-                } else if (event.target.innerText == '.') {
-                    if ((firstNum == undefined) && dotCount < 1) {
-                        if (expression) {
-                            if (!(String(expression).includes('.'))) {
-                                expression = expression.concat(`${event.target.innerText}`);
-                                updateDisplay();
-                                console.log(`expression: ${expression}`);
-                                dotCount++;
-                            }
-                        }
-
-                    } else if (firstNum) {
-                        if (!(operators.includes(expression.charAt(expression.length - 1)))) {
-                            dotCount = dotCount == 1 ? dotCount : 0;
-                            if (!(expression.includes('.', expression.indexOf('.') + 1)) && (dotCount < 1)) {
-                                expression = expression.concat(`${event.target.innerText}`);
-                                updateDisplay();
-                                console.log(`expression: ${expression}`);
-                                dotCount++;
-                            }
-                        }
-                    }
-                } else if (!(operators.includes(event.target.innerText)) && (event.target.innerText !== '=')) {
-                    expression = expression.concat(`${event.target.innerText}`);
-                    updateDisplay();
-                    console.log(`expression: ${expression}`);
-                }
-            })
-        }
-        function add(x, y) {
-            return x + y;
-        }
-        function sub(x, y) {
-            return x - y;
-        }
-        function multiply(x, y) {
-            return x * y;
-        }
-        function divide(x, y) {
-            return x / y;
-        }
-        function operate(x, o, y) {
-            if (o === '+') {
-                return add(x, y);
-            } else if (o === '-') {
-                return sub(x, y);
-            } else if (o === '*') {
-                return multiply(x, y);
-            } else if (o === '/') {
-                return divide(x, y);
-            }
-        }
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
