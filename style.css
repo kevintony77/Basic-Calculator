@@ -1,0 +1,33 @@
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        height: auto;
+    }
+
+    .display {
+        height: auto;
+        min-height: 150px;
+        background-color: green;
+        width: 100%;
+        font-size: 50px;
+        word-wrap: break-word;
+        text-align: right;
+        padding: 10px;
+        box-sizing: border-box;
+        user-select: none;
+    }
+
+    .buttons {
+
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+
+    .buttons button {
+        height: 50px;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
